@@ -1,0 +1,21 @@
+﻿<div>
+    @using (Html.BeginForm("Search", "Shop"))
+    {
+        @*<b> Search Option: </b> @Html.RadioButton("option", "Name") <text>Name</text> @Html.RadioButton("option", "Gender") <text> Gender </text>
+            @Html.RadioButton("option", "Subjects")<text>Subject</text> @Html.TextBox("search") <input type="submit" name="submit" value="Search" />*@
+        <div class="form-group" style="display:flex; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+
+            <label for="Search" style="padding-top: 10px">Search by category</label>
+            <select class="form-control" name="search" id="search">
+                <option value="">Choose a category</option>
+                <option value="House Hold">House Hold</option>
+                <option value="Food">Food</option>
+                <option value="Skin Care">Skin Care</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Others">Others</option>
+            </select>
+            <input type="submit" />
+        </div>
+
+    }
+</div>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<SmartStore.Models.Item>
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>Store Manager Dashboard</h2>
+<div>
+    @Html.ActionLink("Add New Item", "AddNewItem", "Shop", new { @class = "btn btn-primary" })
+
+    <div class="panel panel-success">
+        <div class="panel-heading" style="height: 50px">
+            <div class="col-md-6">
+                <h1 class="panel-title">Items in Stock</h1>
+            </div>
+            <div class="col-md-6">
+                @Html.Partial("_SearchTab", new { @class = "panel-title" })
+            </div>
+        </div>
+        <div class="panel-body">
+            @if (!Model.Any())
+            {
+                <p>No items in stock</p>
+            }
+            else
+            {
+                <table id="items" class="table table-hover">
+                    <tr class="info">
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Supplier</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="info">
+                            <td>@Html.ActionLink(@item.Name, "Edit", "Shop", new { id = item.Id }, null)</td>
+                            @*add message on hover*@
+                            <td>$@item.Amount</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Category.Name </td>
+                            <td>@item.Supplier.Name </td>
+                            @*<td>@string.Format("{0:d MMM, yyyy}", @item.ExpiringDate)</td>*@
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Shop", new { id = item.Id },
+                                 new { @class = "btn btn-info" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id },
+                                     new { @class = "btn btn-success" })
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Delete", "Delete", "Shop", new { id = item.Id },
+                                    new { @class = "btn btn-danger" })*@
+                                <button data-item-id="@item.Id" class="btn btn-danger delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+    
+</div>
+@section scripts
+{
+    @*client side validification*@
+    @Scripts.Render("~/Scripts/jquery.validate")
+    @Scripts.Render("~/bundles/lib") 
+
+    <script>
+        $(document).ready(function () {
+
+            $("#items").on("click", ".delete-btn", function () {
+
+                var deleteButton = $(this); //the clicked button
+
+                if (confirm("Are you sure you want to delete this item ?"))
+                    $.ajax({
+                        url: "/Shop/Delete/" + deleteButton.attr("data-item-id"), // calls the delete method and passes the id
+                        success: function () { // removing the table role from the view
+                            //console.log("Deleted successfully");
+                            deleteButton.parents("tr").remove();
+                        }
+                    })
+            })
+        });
+    </script>
+
+}
+
+

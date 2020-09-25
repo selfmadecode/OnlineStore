@@ -1,0 +1,48 @@
+﻿@model SmartStore.ViewModel.ItemViewModel
+@{
+    ViewBag.Title = "AddNewItem";
+}
+
+<h2>AddNewItem</h2>
+
+@using (Html.BeginForm("Save", "Shop"))
+{
+    @Html.ValidationSummary(true, "Please fix the following issues");
+    //excludepropertyErrors set to true in order to removes the list of errors and pass a default msg
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.Name)
+        @Html.TextBoxFor(i => i.Item.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.Item.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.Amount)
+        @Html.TextBoxFor(i => i.Item.Amount, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.Item.Amount)
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.ExpiringDate)
+        @Html.TextBoxFor(i => i.Item.ExpiringDate, "{0:d MMM yyyy}" , new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.Quantity)
+        @Html.TextBoxFor(i => i.Item.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.Item.Quantity)
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.SupplierId)
+        @Html.DropDownListFor(i => i.Item.SupplierId, new SelectList(Model.Supplier, "Id", "Name"), "Select Supplier", new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.Item.SupplierId)
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.CategoryId)
+        @Html.DropDownListFor(i => i.Item.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(i => i.Item.CategoryId)
+
+    </div>
+    @Html.HiddenFor(i => i.Item.Id)
+    <button type="submit" class="btn btn-success">Save</button>
+}
+

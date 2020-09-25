@@ -1,0 +1,67 @@
+﻿@using SmartStore.Models
+@{
+    ViewBag.Title = "AddToCart";
+}
+<h2>Checkout</h2>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h1 class="panel-title">Items in your Cart</h1>
+    </div>
+    <div class="panel-body">
+        @if ((List<UserCart>)Session["Cart"] == null)
+        {
+            <p>No items in Cart</p>
+        }
+        else
+        {
+            <table id="items" class="table table-hover">
+                <tr class="info">
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in (List<UserCart>)Session["Cart"])
+                {
+                    <tr>
+                        <td>@item.ItemName</td>
+                        <td>@item.Amount</td>
+                        <td>@item.Quantity</td>
+                        <td>
+                            @*@Html.ActionLink("Remove Item", "RemoveFromCart", "Cart",
+                                new { id = item.Id }, new { @class = "btn btn-danger" })*@
+                            <button data-item-id="@item.Id" class="btn btn-danger delete-btn">Remove Item</button>
+                        </td>
+                    </tr>
+                }
+            </table>
+            @Html.ActionLink("Check Out", "Checkout", "Cart", new { @class = "btn btn-success" })
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $("#items").on("click", ".delete-btn", function () {
+
+                var deleteButton = $(this); //the clicked button
+
+                if (confirm("Are you sure you want to delete this item ?"))
+                    $.ajax({
+                        url: "/Cart/RemoveFromCart/" + deleteButton.attr("data-item-id"), // calls the delete method and passes the id
+                        success: function () { // removing the table role from the view
+                            //console.log("Deleted successfully");
+                            deleteButton.parents("tr").remove();
+                        }
+                    })
+            })
+        });
+    </script>
+
+}
+
+

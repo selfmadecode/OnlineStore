@@ -1,0 +1,19 @@
+﻿@model SmartStore.Models.Item
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Product Details</h2>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h1 class="panel-title">@Model.Name</h1>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">Amount: $@Model.Amount</li>
+        <li class="list-group-item">Expiry Date: @string.Format("{0:d MMM, yyyy}", @Model.ExpiringDate) </li>
+        <li class="list-group-item">Category: @Model.Category.Name</li>
+        <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+</div>
+

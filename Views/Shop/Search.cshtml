@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SmartStore.Models.Item>
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>Search</h2>
+@*store manager cannot add or delete item*@
+
+<div>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h1 class="panel-title">Items in Stock</h1>
+        </div>
+        <div class="panel-body">
+            @if (!Model.Any())
+            {
+                <p>No items in stock</p>
+            }
+            else
+            {
+                <table id="items" class="table table-hover">
+                    <tr class="info">
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="info">
+                            <td>@item.Name</td>
+                            @*add message on hover*@
+                            <td>$@item.Amount</td>
+                            <td>@item.Category.Name </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id },
+                                    new { @class = "btn btn-info" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = item.Id },
+                                    new { @class = "btn btn-success" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+
+</div>
+@section scripts
+{
+    @*client side validification*@
+    @Scripts.Render("~/Scripts/jquery.validate")
+
+
+
+}
+
+

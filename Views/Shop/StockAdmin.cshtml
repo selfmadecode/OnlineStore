@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SmartStore.Models.Item>
+@{
+    ViewBag.Title = "Items";
+}
+    
+<h2>Admin Dashboard</h2>
+<div>
+    @Html.ActionLink("Add New Item", "AddNewItem", "Shop", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New Store Manager", "AddStoreManager", "Shop", new { @class = "btn btn-primary" })
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h1 class="panel-title">Items in Stock</h1>
+        </div>
+        
+    </div>
+</div>
+@section scripts
+{
+    @*client side validification*@
+    @Scripts.Render("~/Scripts/jquery.validate")
+    
+}
+
+
