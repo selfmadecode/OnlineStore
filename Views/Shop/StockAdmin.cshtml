@@ -4,9 +4,11 @@
 }
     
 <h2>Admin Dashboard</h2>
+@ViewBag.NewManager
 <div>
     @Html.ActionLink("Add New Item", "AddNewItem", "Shop", new { @class = "btn btn-primary" })
-    @Html.ActionLink("Add New Store Manager", "AddStoreManager", "Shop", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New Store Manager", "AddStoreManager", "cart", new { @class = "btn btn-primary" }, null)
+
 
     <div class="panel panel-success">
         <div class="panel-heading">
