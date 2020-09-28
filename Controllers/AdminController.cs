@@ -12,7 +12,7 @@ namespace SmartStore.Controllers
     [Authorize(Roles = RoleName.Admin)]
     public class AdminController : Controller
     {
-        // GET: Admin
+        // admin/addstoremanager
         public ActionResult AddStoreManager()
         {
             return View();
