@@ -20,9 +20,6 @@ namespace SmartStore.Controllers
         [HttpPost]
         public ActionResult AddManager(ApplicationDbContext context, StoreManager storeManager)
         {
-            var na = storeManager.EmailAddress;
-            var po = storeManager.Password;
-
             if (ModelState.IsValid)
             {
                 // if the username does not exist

@@ -4,14 +4,11 @@
 }
     
 <h2>Admin Dashboard</h2>
-@if(ViewBag.NewManager == null)
+@if(ViewBag.NewManager != null)
 {
-    <p>Empty ooo</p>
+<p>@ViewBag.NewManager</p>
 }
-else
-{
-    <p>@ViewBag.NewManager</p>
-}
+
 <div>
     @Html.ActionLink("Add New Item", "AddNewItem", "Shop", new { @class = "btn btn-primary" })
     @Html.ActionLink("Add New Store Manager", "AddStoreManager", "admin", null, new { @class = "btn btn-primary" })
