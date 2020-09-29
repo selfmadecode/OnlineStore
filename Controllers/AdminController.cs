@@ -20,8 +20,8 @@ namespace SmartStore.Controllers
         [HttpPost]
         public ActionResult AddManager(ApplicationDbContext context, StoreManager storeManager)
         {
-            if (ModelState.IsValid)
-            {
+            // fix the error here
+            
                 if (!context.Users.Any(u => u.UserName == storeManager.EmailAddress))
                 {
                     var user = new UserStore<ApplicationUser>(context);
@@ -37,7 +37,7 @@ namespace SmartStore.Controllers
                     userManager.AddToRole(admin.Id, RoleName.StoreManager);
                     ViewBag.NewManager = "Store Manager Added succesffully";
                 }
-            }
+            
             return RedirectToAction("Products", "Shop");
             
         }
