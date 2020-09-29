@@ -16,10 +16,8 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(i => i.Password)
-        @Html.TextBoxFor(i => i.Password, new { @class = "form-control" })
+        @Html.PasswordFor(i => i.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(i => i.Password)
     </div>
-
-    @Html.HiddenFor(i => i.Id)
     <button type="submit" class="btn btn-success">Add New Store Manager</button>
 }

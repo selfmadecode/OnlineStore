@@ -20,8 +20,12 @@ namespace SmartStore.Controllers
         [HttpPost]
         public ActionResult AddManager(ApplicationDbContext context, StoreManager storeManager)
         {
-            // fix the error here
-            
+            var na = storeManager.EmailAddress;
+            var po = storeManager.Password;
+
+            if (ModelState.IsValid)
+            {
+                // if the username does not exist
                 if (!context.Users.Any(u => u.UserName == storeManager.EmailAddress))
                 {
                     var user = new UserStore<ApplicationUser>(context);
@@ -31,15 +35,24 @@ namespace SmartStore.Controllers
                     var admin = new ApplicationUser
                     {
                         UserName = storeManager.EmailAddress,
+                        Email = storeManager.EmailAddress,
                         PasswordHash = passwordHasher.HashPassword(storeManager.Password)
                     };
                     userManager.Create(admin);
                     userManager.AddToRole(admin.Id, RoleName.StoreManager);
                     ViewBag.NewManager = "Store Manager Added succesffully";
+                    return View("~/Views/Shop/StockAdmin.cshtml");
                 }
-            
-            return RedirectToAction("Products", "Shop");
-            
+                else
+                {// if the user is already in db
+                    ViewBag.NewManager = "User already exist";
+                    return View("~/Views/Shop/StockAdmin.cshtml");
+                }
+            }
+            else
+            {// model state is not valid
+                return View("AddStoreManager", storeManager);
+            }
         }
     }
 }
