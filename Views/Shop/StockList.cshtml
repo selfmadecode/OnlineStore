@@ -47,15 +47,16 @@
                             <td>
                                 @Html.ActionLink("Edit", "Edit", "Shop", new { id = item.Id },
                                  new { @class = "btn btn-info" })
+
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id },
                                      new { @class = "btn btn-success" })
                             </td>
                             <td>
-                                @*@Html.ActionLink("Delete", "Delete", "Shop", new { id = item.Id },
-                                    new { @class = "btn btn-danger" })*@
-                                <button data-item-id="@item.Id" class="btn btn-danger delete-btn">Delete</button>
+                                @Html.ActionLink("Delete", "Delete", "Shop", new { id = item.Id },
+                               new { @class = "btn btn-danger" })
+                                @*<button data-item-id="@item.Id" class="btn btn-danger delete-btn">Delete</button>*@
                             </td>
                         </tr>
                     }

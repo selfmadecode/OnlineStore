@@ -116,3 +116,9 @@ C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.AddUse
 C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.AddIdToCart.resources
 C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.MadeIdIntInCart.resources
 C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.AddUserToCart.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.AddUserIdInCart.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.AddCartt.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.UpdateCartModel.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.cartUserId.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.Check.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.MakeIdIdentityInUserCart.resources

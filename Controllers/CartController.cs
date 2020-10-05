@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Microsoft.AspNet.Identity;
+using static System.Web.HttpContext;
+using SmartStore.Services;
 
 namespace SmartStore.Controllers
 {
@@ -17,7 +19,6 @@ namespace SmartStore.Controllers
             _dbContext = new ApplicationDbContext();
         }
         // GET: Cart
-        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -41,7 +42,8 @@ namespace SmartStore.Controllers
                     ItemId = (byte)allItem.Id,
                     //Id = allItem.Id,
                     Amount = allItem.Amount,
-                    UserEmail = User.Identity.Name //get user email
+                    UserEmail = User.Identity.GetUserName(),
+                    UserId = User.Identity.GetUserId()
                 });
 
                 Session["Cart"] = cart;
@@ -66,8 +68,9 @@ namespace SmartStore.Controllers
                         ItemId = (byte)allItem.Id,
                         //Id = allItem.Id,
                         Amount = allItem.Amount,
-                        UserEmail = User.Identity.Name
-                    });
+                        UserEmail = User.Identity.GetUserName(),
+                        UserId = User.Identity.GetUserId()
+                    });;
                 }
                 Session["Cart"] = cart;
                 return RedirectToAction("Products", "Shop");
@@ -95,22 +98,41 @@ namespace SmartStore.Controllers
             }
          return -1;
         }
+
+        //User clicks checkout
+
+        [Authorize]
         public ActionResult Checkout()
         {
-            List<UserCart> cartItem = (List<UserCart>)Session["Cart"];
-            UserCart cart = new UserCart();
+            //var cartService = new CartService();
 
-            foreach (var item in cartItem)
+            List<UserCart> cartItem = (List<UserCart>)Session["Cart"];
+            var result = CartService.CheckOut(cartItem);
+
+            if (!result)
+                return Content("Something went wrong!");
+
+            /*
+            List<UserCart> cartItem = (List<UserCart>)Session["Cart"];
+            for (int i = 0; i < cartItem.Count; i++)
             {
-                cart.ItemName = item.ItemName;
-                cart.Quantity = item.Quantity;
-                cart.Amount = item.Amount;
-                cart.UserEmail = item.UserEmail;
-                cart.ItemId = item.ItemId;
-                cart.User.Id = item.User.Id; //to get the logged in user
+                //if the user shops withour loggin in
+                if (cartItem[i].UserEmail == "" || cartItem[i].UserId == null)
+                {
+                    //search the user in db 
+                    cartItem[i].UserEmail = Current.User.Identity.GetUserName();
+                    cartItem[i].UserId = Current.User.Identity.GetUserId();
+                }
+                else
+                {
+                    _dbContext.Carts.AddRange(cartItem);
+                }
             }
-            _dbContext.Carts.Add(cart);
-            _dbContext.SaveChanges(); //not saving, id is 0
+
+            _dbContext.Carts.AddRange(cartItem);
+            //_dbContext.Carts.Add(test);
+            _dbContext.SaveChanges();
+            */
             return Content("Done!");
         }
     }

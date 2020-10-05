@@ -11,15 +11,18 @@ namespace SmartStore.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public byte Id { get; set; }
 
         public string UserEmail { get; set; }
         public string ItemName { get; set; }
         public int Quantity { get; set; }
         public double Amount { get; set; }
-        public bool Processing { get; set; } = false;
+        public bool Processing { get; set; } = true;
+
         public Item Item { get; set; }
         public byte ItemId { get; set; }
+
         public ApplicationUser User { get; set; } //added
+        public string UserId { get; set; }
     }
 }
