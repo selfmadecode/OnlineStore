@@ -41,7 +41,7 @@ namespace SmartStore.Controllers
             var result = cartService.CheckOut(cartItem);
 
             if (!result)
-                return Content("Something went wrong!");
+                return HttpNotFound("Something went wrong!");
 
             return Content("Done!");
         }
