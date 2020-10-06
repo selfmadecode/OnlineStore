@@ -27,7 +27,7 @@ namespace SmartStore.Controllers
             cart = cartService.RemoveFromCart(id, cart);
 
             if (cart.Count == 0) // if item dosent exist in cart
-                return Content("Nothing in cart, redirect to shop");
+                return HttpNotFound();
 
             return View("Index");
         }
