@@ -8,38 +8,40 @@ using System.Web;
 
 namespace SmartStore.Services
 {
-    public class ShopService
+    public class ShopService : IShopService
     {
         public static Context context = new Context();
         //List of all products
 
-        public static List<Item> GetAllProducts()
+        public List<Item> GetAllProducts()
         {
             var allItems = context._dbContext.Items.Include(c => c.Category).Include(s => s.Supplier).ToList();
             return allItems;
         }
 
         //Get Items by id
-        public static Item GetItemById(int id)
+        public Item GetItemById(int id)
         {
             var item = context._dbContext.Items.Include(i => i.Supplier).Include(i => i.Category).Single(i => i.Id == id);
             return item;
         }
+
         //List of Category
-        public static List<Category> GetAllCategories()
+        public List<Category> GetAllCategories()
         {
             var getCategoryFromDb = context._dbContext.Categories.ToList();
             return getCategoryFromDb;
         }
+
         //List of Suppliers
-        public static List<Supplier> GetAllSuppliers()
+        public List<Supplier> GetAllSuppliers()
         {
             var getSupplierFromDb = context._dbContext.Suppliers.ToList();
             return getSupplierFromDb;
         }
 
         //Create the view Model
-        public static ItemViewModel itemViewModel(Item item = null)
+        public ItemViewModel ItemViewModel(Item item = null)
         {
             //The item parameter is null so that when the model state is not valid
             // the details in the param will be sent back to the user
@@ -67,14 +69,14 @@ namespace SmartStore.Services
         }
 
         //Add to DB
-        public static void AddItemToDb(Item item)
+        public void AddItemToDb(Item item)
         {
             context._dbContext.Items.Add(item);
             context._dbContext.SaveChanges();
         }
 
         // Update Item on DataBase
-        public static void UpdateItemInDb(Item item)
+        public void UpdateItemInDb(Item item)
         {
             var ItemToUpdate = context._dbContext.Items.Single(i => i.Id == item.Id);
 
@@ -89,7 +91,7 @@ namespace SmartStore.Services
         }
 
         //Edit Item
-        public static ItemViewModel EditItemInDb(int id)
+        public ItemViewModel EditItemInDb(int id)
         {
             var item = context._dbContext.Items.SingleOrDefault(i => i.Id == id);
 
@@ -102,12 +104,11 @@ namespace SmartStore.Services
                 Categories = GetAllCategories(),
                 Supplier = GetAllSuppliers()
             };
-
             return itemViewModel;
         }
 
         //Delete Item
-        public static Item DeleteItem(int id)
+        public Item DeleteItem(int id)
         {
             var item = GetItemById(id);
             
@@ -121,11 +122,10 @@ namespace SmartStore.Services
                 context._dbContext.SaveChanges();
                 return item;
             }
-            
         }
 
         //Item details
-        public static Item GetItemDetails(int id)
+        public Item GetItemDetails(int id)
         {
            var item = GetItemById(id);
             if (item == null)
@@ -133,7 +133,8 @@ namespace SmartStore.Services
 
             return item;
         }
-        public static List<Item> SearchDb(string search)
+
+        public List<Item> SearchDb(string search)
         {
             var items = GetAllProducts();
 

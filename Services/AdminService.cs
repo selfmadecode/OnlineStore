@@ -9,7 +9,7 @@ using System.Web;
 
 namespace SmartStore.Services
 {
-    public class AdminService: Controller
+    public class AdminService: Controller // remove the controller
     {
         public static bool CreateStoreManager(ApplicationDbContext context, StoreManager storeManager)
         {

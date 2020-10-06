@@ -1,6 +1,8 @@
 ﻿@using SmartStore.Models
 @{
     ViewBag.Title = "AddToCart";
+    List<UserCart> cart = (List<UserCart>)Session["Cart"];
+    var grandTotal = 0.0;
 }
 <h2>Checkout</h2>
 
@@ -9,7 +11,7 @@
         <h1 class="panel-title">Items in your Cart</h1>
     </div>
     <div class="panel-body">
-        @if ((List<UserCart>)Session["Cart"] == null)
+        @if (cart == null || cart.Count == 0)
         {
             <p>No items in Cart</p>
         }
@@ -20,6 +22,7 @@
                     <th>Name</th>
                     <th>Amount</th>
                     <th>Quantity</th>
+                    <th>Total</th>
                     <th></th>
                 </tr>
                 @foreach (var item in (List<UserCart>)Session["Cart"])
@@ -28,14 +31,23 @@
                         <td>@item.ItemName</td>
                         <td>@item.Amount</td>
                         <td>@item.Quantity</td>
+                        <td>@{
+                            var quantity = item.Quantity;
+                            var amount = item.Amount;
+                            var total = quantity * amount;
+                            grandTotal += total;
+
+
+                        }, @total</td>
                         <td>
-                            @*@Html.ActionLink("Remove Item", "RemoveFromCart", "Cart",
-                                new { id = item.Id }, new { @class = "btn btn-danger" })*@
-                            <button data-item-id="@item.Id" class="btn btn-danger delete-btn">Remove Item</button>
+                            @Html.ActionLink("Remove Item", "RemoveFromCart", "Cart",
+                                new { id = item.ItemId }, new { @class = "btn btn-danger" })
+                            @*<button data-item-id="@item.Id" class="btn btn-danger delete-btn">Remove Item</button>*@
                         </td>
                     </tr>
                 }
             </table>
+            <h3>Grand Total:  @grandTotal </h3> <br />
             @Html.ActionLink("Check Out", "Checkout", "Cart", new { @class = "btn btn-success" })
         }
     </div>

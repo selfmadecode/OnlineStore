@@ -250,6 +250,8 @@
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\Context.cs" />
+    <Compile Include="Services\Interfaces\ICartService.cs" />
+    <Compile Include="Services\Interfaces\IShopService.cs" />
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ItemAndCartViewModel.cs" />
