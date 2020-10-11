@@ -6,12 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using SmartStore.Services.Interfaces;
 
 namespace SmartStore.Services
 {
-    public class AdminService: Controller // remove the controller
+    public class AdminService: Controller, IAdminService // remove the controller
     {
-        public static bool CreateStoreManager(ApplicationDbContext context, StoreManager storeManager)
+        public bool CreateStoreManager(ApplicationDbContext context, StoreManager storeManager)
         {
             // if the username does not exist
             if (!context.Users.Any(u => u.UserName == storeManager.EmailAddress))

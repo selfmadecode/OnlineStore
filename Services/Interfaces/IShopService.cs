@@ -1,4 +1,5 @@
 ﻿using SmartStore.Models;
+using SmartStore.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace SmartStore.Services
 {
     public interface IShopService
     {
-        List<Item> GetAllProducts();
+        List<Item> GetAllProducts(); //
 
         Item GetItemById(int id);
 
@@ -16,12 +17,17 @@ namespace SmartStore.Services
 
         List<Supplier> GetAllSuppliers();
 
-        void AddItemToDb(Item item);
+        void AddItemToDb(Item item); //
 
-        Item DeleteItem(int id);
+        Item DeleteItem(int id); //
 
-        List<Item> SearchDb(string search);
+        List<Item> SearchDb(string search); //
 
-        Item GetItemDetails(int id);
+        Item GetItemDetails(int id); //
+
+        void UpdateItemInDb(Item item); //
+        ItemViewModel EditItemInDb(int id); //
+
+        ItemViewModel ItemViewModel(Item item = null); //
     }
 }

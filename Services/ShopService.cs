@@ -10,33 +10,39 @@ namespace SmartStore.Services
 {
     public class ShopService : IShopService
     {
-        public static Context context = new Context();
-        //List of all products
+        readonly Context Dbcontext;
+        public ShopService(Context context)
+        {
+            Dbcontext = context;
+        }
+        // public static Context Dbcontext = new Context();
 
+        //List of all products
         public List<Item> GetAllProducts()
         {
-            var allItems = context._dbContext.Items.Include(c => c.Category).Include(s => s.Supplier).ToList();
+            // context._dbContext.Database.CommandTimeout = 300;
+            var allItems = Dbcontext._dbContext.Items.Include(c => c.Category).Include(s => s.Supplier).ToList();
             return allItems;
         }
 
         //Get Items by id
         public Item GetItemById(int id)
         {
-            var item = context._dbContext.Items.Include(i => i.Supplier).Include(i => i.Category).Single(i => i.Id == id);
+            var item = Dbcontext._dbContext.Items.Include(i => i.Supplier).Include(i => i.Category).Single(i => i.Id == id);
             return item;
         }
 
         //List of Category
         public List<Category> GetAllCategories()
         {
-            var getCategoryFromDb = context._dbContext.Categories.ToList();
+            var getCategoryFromDb = Dbcontext._dbContext.Categories.ToList();
             return getCategoryFromDb;
         }
 
         //List of Suppliers
         public List<Supplier> GetAllSuppliers()
         {
-            var getSupplierFromDb = context._dbContext.Suppliers.ToList();
+            var getSupplierFromDb = Dbcontext._dbContext.Suppliers.ToList();
             return getSupplierFromDb;
         }
 
@@ -71,14 +77,14 @@ namespace SmartStore.Services
         //Add to DB
         public void AddItemToDb(Item item)
         {
-            context._dbContext.Items.Add(item);
-            context._dbContext.SaveChanges();
+            Dbcontext._dbContext.Items.Add(item);
+            Dbcontext._dbContext.SaveChanges();
         }
 
         // Update Item on DataBase
         public void UpdateItemInDb(Item item)
         {
-            var ItemToUpdate = context._dbContext.Items.Single(i => i.Id == item.Id);
+            var ItemToUpdate = Dbcontext._dbContext.Items.Single(i => i.Id == item.Id);
 
             ItemToUpdate.Name = item.Name;
             ItemToUpdate.Amount = item.Amount;
@@ -87,13 +93,13 @@ namespace SmartStore.Services
             ItemToUpdate.SupplierId = item.SupplierId;
             ItemToUpdate.CategoryId = item.CategoryId;
 
-            context._dbContext.SaveChanges();
+            Dbcontext._dbContext.SaveChanges();
         }
 
         //Edit Item
         public ItemViewModel EditItemInDb(int id)
         {
-            var item = context._dbContext.Items.SingleOrDefault(i => i.Id == id);
+            var item = Dbcontext._dbContext.Items.SingleOrDefault(i => i.Id == id);
 
             if (item == null)
                 return null;
@@ -117,9 +123,9 @@ namespace SmartStore.Services
             else
             {
                 // context._dbContext.Entry(item).State = EntityState.Detached;
-                context._dbContext.Entry(item).State = EntityState.Deleted;
+                Dbcontext._dbContext.Entry(item).State = EntityState.Deleted;
                 //context._dbContext.Items.Remove(item);
-                context._dbContext.SaveChanges();
+                Dbcontext._dbContext.SaveChanges();
                 return item;
             }
         }

@@ -12,13 +12,18 @@ namespace SmartStore.Controllers
 {
     public class ShopController : Controller
     {
+        IShopService _shopService;
+        public ShopController(IShopService shopService)
+        {
+            _shopService = shopService;
+        }
         // GET: Items in stock
         //[Authorize]
-        ShopService shopService = new ShopService();
+       // ShopService shopService = new ShopService();
         public ActionResult Products()
         {
             // var items = _dbContext.Items.Include(c => c.Category).Include(s => s.Supplier).ToList();
-            var items = shopService.GetAllProducts();
+            var items = _shopService.GetAllProducts();
             
             //If the Admin is logged in, show the admin dashboard(stockAdmin)
             if (User.IsInRole(RoleName.Admin))
@@ -38,7 +43,7 @@ namespace SmartStore.Controllers
         [Authorize(Roles = RoleName.Admin + "," + RoleName.StoreManager)] //test 4
         public ActionResult AddNewItem()
         {
-            var itemViewModel = shopService.ItemViewModel();
+            var itemViewModel = _shopService.ItemViewModel();
 
             return View("ItemForm", itemViewModel);
         }
@@ -50,17 +55,17 @@ namespace SmartStore.Controllers
         {
             if(!ModelState.IsValid)
             {
-                var itemViewModel = shopService.ItemViewModel(item);
+                var itemViewModel = _shopService.ItemViewModel(item);
                 
                 return View("ItemForm", itemViewModel);
             }
 
             if (item.Id == 0) // new item will be added
-                shopService.AddItemToDb(item);
+                _shopService.AddItemToDb(item);
             // _dbContext.Items.Add(item);
             else
             {
-                shopService.UpdateItemInDb(item);
+                _shopService.UpdateItemInDb(item);
             }
 
             //AddThisFeature (Keep the form open incase you want to add more items) 
@@ -70,7 +75,7 @@ namespace SmartStore.Controllers
         [Authorize(Roles = RoleName.Admin + "," + RoleName.StoreManager)]
         public ActionResult Edit(int id)
         {
-            var itemInDb = shopService.EditItemInDb(id);
+            var itemInDb = _shopService.EditItemInDb(id);
 
             if (itemInDb == null)
                 return HttpNotFound();
@@ -82,7 +87,7 @@ namespace SmartStore.Controllers
         [Authorize(Roles = RoleName.StoreManager)] //test 2
         public ActionResult Delete(int id)
         {
-            var item = shopService.DeleteItem(id);
+            var item = _shopService.DeleteItem(id);
 
             if (item == null)
                 return HttpNotFound();
@@ -92,7 +97,7 @@ namespace SmartStore.Controllers
         //Get Item details
         public ActionResult Details (int Id)
         {
-            var productDetails = shopService.GetItemDetails(Id);
+            var productDetails = _shopService.GetItemDetails(Id);
             if (productDetails == null)
                 return HttpNotFound();
 
@@ -104,7 +109,7 @@ namespace SmartStore.Controllers
             if (string.IsNullOrEmpty(search))
                 return RedirectToAction("Products");
 
-            var items = shopService.SearchDb(search);
+            var items = _shopService.SearchDb(search);
             return View(items);
         }
     }

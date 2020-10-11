@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using SmartStore.Models;
 using SmartStore.Services;
+using SmartStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace SmartStore.Controllers
     [Authorize(Roles = RoleName.Admin)]
     public class AdminController : Controller
     {
+        IAdminService _adminService;
+        public AdminController(IAdminService adminService)
+        {
+            _adminService = adminService;
+        }
         // admin/addstoremanager
         public ActionResult AddStoreManager()
         {
@@ -24,7 +30,7 @@ namespace SmartStore.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = AdminService.CreateStoreManager(context, storeManager);
+                var result = _adminService.CreateStoreManager(context, storeManager);
 
                 if (result)
                 {
