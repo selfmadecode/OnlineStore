@@ -29,7 +29,6 @@ namespace SmartStore.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var result = _adminService.CreateStoreManager(context, storeManager);
 
                 if (result)
@@ -45,7 +44,6 @@ namespace SmartStore.Controllers
             }
             else
             {
-                // model state is not valid
                 return View("AddStoreManager", storeManager);
             }
         }

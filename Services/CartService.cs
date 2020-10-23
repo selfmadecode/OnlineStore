@@ -11,7 +11,6 @@ namespace SmartStore.Services
 {
     public class CartService : Controller, ICartService
     {
-        //public static Context context = new Context();
         readonly Context Dbcontext;
         public CartService(Context _context)
         {
@@ -21,27 +20,27 @@ namespace SmartStore.Services
         public List<UserCart> AddToCart(Item item)
         {
             List<UserCart> cart = new List<UserCart>();
+
             cart.Add(new UserCart
             {
                 ItemName = item.Name,
                 Quantity = 1,
                 ItemId = (byte)item.Id,
-                Amount = item.Amount,
-                //UserEmail = User.Identity.GetUserName(),
-                //UserId = User.Identity.GetUserId()
+                Amount = item.Amount
             });
+
             return cart;
-
-
         }
+
         public List<UserCart> RemoveFromCart(int id, List<UserCart> cart)
         {
             int index = IsExist(id, cart);
+
             if (index != -1)
                 cart.RemoveAt(index);
+
             return cart;
         }
-
 
         // checks if the cart contains an item with the same Id
         public int IsExist(int id, List<UserCart> cart)
@@ -61,7 +60,7 @@ namespace SmartStore.Services
             {
                 return false;
             }
-            //List<UserCart> cartItem = (List<UserCart>)Session["Cart"];
+
             for (int i = 0; i < cartItem.Count; i++)
             {
                 //if the user shops withour loggin in

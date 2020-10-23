@@ -401,7 +401,6 @@ namespace SmartStore.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            Session.Abandon(); // i added this to destroy the cart session when a user logs off
             return RedirectToAction("Index", "Home");
         }
 

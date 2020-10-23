@@ -15,7 +15,6 @@ namespace SmartStore.Services
         {
             Dbcontext = context;
         }
-        // public static Context Dbcontext = new Context();
 
         //List of all products
         public List<Item> GetAllProducts()

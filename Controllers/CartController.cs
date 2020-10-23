@@ -31,7 +31,7 @@ namespace SmartStore.Controllers
 
             cart = _cartService.RemoveFromCart(id, cart);
 
-            if (cart.Count == 0) // if item dosent exist in cart
+            if (cart.Count == 0) // if no item in cart
                 return View("Index");
 
             return View("Index");
@@ -47,6 +47,7 @@ namespace SmartStore.Controllers
             if (!result)
                 return HttpNotFound("Something went wrong!");
 
+            Session.Abandon(); // destroy the cart session
             return Content("Done!");
         }
 
@@ -61,7 +62,7 @@ namespace SmartStore.Controllers
 
             List<UserCart> cart = (List<UserCart>)Session["Cart"];
 
-            if (Session["Cart"] == null) //destroyed this session when the user logs off
+            if (Session["Cart"] == null)
             {
                 Session["Cart"] = _cartService.AddToCart(item);
 
