@@ -72,12 +72,12 @@ namespace SmartStore.Services
                 }
                 else
                 {
-                    Dbcontext._dbContext.Carts.AddRange(cartItem);
+                    Dbcontext._dbContext.UserCart.AddRange(cartItem);
                 }
             }
             //Uncomment the lines below to save cart items to DB
-            //context._dbContext.Carts.AddRange(cartItem);
-            //context._dbContext.SaveChanges();
+            Dbcontext._dbContext.UserCart.AddRange(cartItem);
+            Dbcontext._dbContext.SaveChanges();
             return true;
         }
 

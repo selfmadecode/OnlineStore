@@ -1,0 +1,43 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "Items";
+}
+
+<h2>All orders</h2>
+<div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading" style="height: 50px">
+            <div class="col-md-6">
+                <h1 class="panel-title">Items in Stock</h1>
+            </div>
+        </div>
+        <div class="panel-body">
+            @if (!Model.Any())
+            {
+                <p>No Order</p>
+            }
+            else
+            {
+        <table id="items" class="table table-hover">
+            <tr class="info">
+                <th>User ID</th>
+                <th>Order</th>
+            </tr>
+            @foreach (var userId in Model)
+            {
+                <tr class="info">
+                    <td>@Html.ActionLink(@userId, "GetOrder", "Shop", new { id = userId }, null) </td>
+                    <td>
+                        @Html.ActionLink("Get Order", "GetOrder", "Shop", new { id = userId },
+                                         new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+                
+            }
+        </table>
+            }
+        </div>
+    </div>
+
+</div>

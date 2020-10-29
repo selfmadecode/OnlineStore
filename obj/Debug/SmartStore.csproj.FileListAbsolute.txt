@@ -137,3 +137,6 @@ C:\Users\SelfMade\source\repos\SmartStore\bin\Ninject.Web.Mvc.xml
 C:\Users\SelfMade\source\repos\SmartStore\bin\Ninject.Web.WebApi.xml
 C:\Users\SelfMade\source\repos\SmartStore\bin\System.Net.Http.Formatting.xml
 C:\Users\SelfMade\source\repos\SmartStore\bin\System.Web.Http.xml
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.RemovedProcessedFromItem.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.addCart.resources
+C:\Users\SelfMade\source\repos\SmartStore\obj\Debug\SmartStore.Migrations.removeCart.resources

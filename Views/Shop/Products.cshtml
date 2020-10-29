@@ -10,11 +10,11 @@
 <div>
     <div class="panel panel-success">
         <div class="panel-heading" style="height: 50px">
-            <div class="col-md-6">
-                <h1 class="panel-title">Items in Stock</h1>
-            </div>
-            <div class="col-md-6">
+            <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
                 @Html.Partial("_SearchTab", new { @class = "panel-title" })
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                @Html.ActionLink(" ", "Index", "Cart", null, new { @class = "glyphicon glyphicon-shopping-cart" })
             </div>
         </div>
         <div class="panel-body">
@@ -23,20 +23,28 @@
                 <p>No items in stock</p>
             }
             else
-            {
-                <table id="items" class="table table-hover">
-                    <tr class="info">
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr class="info">
+            {   foreach (var item in Model)
+                 {
+                    <div class="panel panel-default col-sm-12 col-sm-6 col-md-4 col-lg-4">
+                        <div class="panel-heading">
+                            <img src="..." alt="..." class="img-rounded img-responsive">
+                            add the name here with the image
+                        </div>
+                        <div class="panel-body">
+                            <p class="text-center"> <strong>@item.Name</strong> </p>
+                            <i>$@item.Amount</i>
+                            <p>@item.Category.Name</p>
+                            @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id },
+                                    new { @class = "btn btn-info" })
+
+                            @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = item.Id },
+                                    new { @class = "btn btn-success add-btn" })
+                        </div>
+                    </div>
+
+
+                        @*<tr class="info">
                             <td>@item.Name</td>
-                            @*add message on hover*@
                             <td>$@item.Amount</td>
                             <td>@item.Category.Name </td>
                             <td>
@@ -47,9 +55,8 @@
                                 @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = item.Id },
                                     new { @class = "btn btn-success add-btn" })
                             </td>
-                        </tr>
+                        </tr>*@
                     }
-                </table>
             }
         </div>
     </div>

@@ -121,5 +121,15 @@ namespace SmartStore.Controllers
 
             return RedirectToAction("Products");
         }
+        public ActionResult GetAllOrder()
+        {
+            var pendinOrders = _shopService.GetAllOrder();
+            return View(pendinOrders);
+        }
+        public ActionResult GetOrder(string id)
+        {
+            var orders = _shopService.GetOrder(id);
+            return View(orders);
+        }
     }
 }

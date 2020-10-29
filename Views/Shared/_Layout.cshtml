@@ -21,9 +21,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole(SmartStore.Models.RoleName.StoreManager))
+                    {
+                        <li>@Html.ActionLink("Products", "products", "shop")</li>
+                        <li>@Html.ActionLink("Order", "GetAllOrder", "shop")</li>
+                    }
+                    else
+                    {
                     <li>@Html.ActionLink("Products", "products", "shop")</li>
                     <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

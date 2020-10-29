@@ -29,5 +29,9 @@ namespace SmartStore.Services
         ItemViewModel EditItemInDb(int id);
 
         ItemViewModel ItemViewModel(Item item = null);
+
+        List<string> GetAllOrder();
+
+        List<UserCart> GetOrder(string userId);
     }
 }

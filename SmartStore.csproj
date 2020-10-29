@@ -262,6 +262,18 @@
     <Compile Include="Migrations\202010042352245_MakeIdIdentityInUserCart.Designer.cs">
       <DependentUpon>202010042352245_MakeIdIdentityInUserCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010281003350_RemovedProcessedFromItem.cs" />
+    <Compile Include="Migrations\202010281003350_RemovedProcessedFromItem.Designer.cs">
+      <DependentUpon>202010281003350_RemovedProcessedFromItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010281255248_addCart.cs" />
+    <Compile Include="Migrations\202010281255248_addCart.Designer.cs">
+      <DependentUpon>202010281255248_addCart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010281311485_removeCart.cs" />
+    <Compile Include="Migrations\202010281311485_removeCart.Designer.cs">
+      <DependentUpon>202010281311485_removeCart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -522,6 +534,8 @@
     <Content Include="Views\Shop\Search.cshtml" />
     <Content Include="Views\Shared\_SearchTab.cshtml" />
     <Content Include="Views\Admin\AddStoreManager.cshtml" />
+    <Content Include="Views\Shop\GetAllOrder.cshtml" />
+    <Content Include="Views\Shop\GetOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,6 +598,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010042352245_MakeIdIdentityInUserCart.resx">
       <DependentUpon>202010042352245_MakeIdIdentityInUserCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010281003350_RemovedProcessedFromItem.resx">
+      <DependentUpon>202010281003350_RemovedProcessedFromItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010281255248_addCart.resx">
+      <DependentUpon>202010281255248_addCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010281311485_removeCart.resx">
+      <DependentUpon>202010281311485_removeCart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

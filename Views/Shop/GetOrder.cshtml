@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SmartStore.Models.UserCart>
+
+@{
+    ViewBag.Title = "GetOrder";
+    var userName = "uu";
+}
+<h2>GetOrder</h2>
+<div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading" style="height: 50px">
+            <div class="col-md-6">
+                <h1 class="panel-title">User Name: userName</h1>
+            </div>
+        </div>
+        <div class="panel-body">
+            @if (!Model.Any())
+            {
+                <p>No items in stock</p>
+            }
+            else
+            {
+                <table id="items" class="table table-hover">
+                    <tr class="info">
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Processing</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="info">
+                            <td>@item.ItemName</td>
+                            <td>@item.Amount</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Processing</td>
+                            <td>
+                                @Html.ActionLink("Process", "", "Shop", new { id = item.Id },
+                                 new { @class = "btn btn-success" })
+
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+
+</div>
+
+
+
+

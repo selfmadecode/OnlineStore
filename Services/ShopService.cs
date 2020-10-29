@@ -159,5 +159,31 @@ namespace SmartStore.Services
                     return items;
             }
         }
+
+        public List<string> GetAllOrder() {
+            //Get the ID from the usercart
+            var allUser = Dbcontext._dbContext.UserCart.Where(p => p.Processing == true).Select(i => i.UserId).ToList();
+
+            List<string> usersId = new List<string>();
+
+            foreach (var id in allUser)
+            {
+                // if the list does not contains the id, add it
+                if (!usersId.Contains(id))
+                {
+                    usersId.Add(id);
+                }
+            }
+            return usersId;
+        }
+
+        public List<UserCart> GetOrder(string userId)
+        {
+            var orders = Dbcontext._dbContext.UserCart.Where(i => i.UserId == userId).ToList();
+            orders.Select(p => p.Processing == true);
+            return orders;
+        }
+
+
     }
 }

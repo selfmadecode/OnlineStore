@@ -23,7 +23,7 @@ namespace SmartStore.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<UserCart> Carts { get; set; }
+        public DbSet<UserCart> UserCart { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
