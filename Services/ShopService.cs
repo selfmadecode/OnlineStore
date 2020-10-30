@@ -3,6 +3,7 @@ using SmartStore.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -73,9 +74,25 @@ namespace SmartStore.Services
             }
         }
 
+        public void SaveImage(Item item)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(item.ImageFile.FileName);
+            string extension = Path.GetExtension(item.ImageFile.FileName);
+
+            fileName += DateTime.Now.ToString("yymmssfff") + extension;
+            item.ImagePath = "~/Content/Images/" + fileName;
+            fileName = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/Images/"), fileName);
+
+            //fileName = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+
+            item.ImageFile.SaveAs(fileName);
+        }
+
         //Add to DB
         public void AddItemToDb(Item item)
         {
+            SaveImage(item);
+
             Dbcontext._dbContext.Items.Add(item);
             Dbcontext._dbContext.SaveChanges();
         }
@@ -83,6 +100,7 @@ namespace SmartStore.Services
         // Update Item on DataBase
         public void UpdateItemInDb(Item item)
         {
+            SaveImage(item);
             var ItemToUpdate = Dbcontext._dbContext.Items.Single(i => i.Id == item.Id);
 
             ItemToUpdate.Name = item.Name;
@@ -91,6 +109,7 @@ namespace SmartStore.Services
             ItemToUpdate.Quantity = item.Quantity;
             ItemToUpdate.SupplierId = item.SupplierId;
             ItemToUpdate.CategoryId = item.CategoryId;
+            ItemToUpdate.ImagePath = item.ImagePath;
 
             Dbcontext._dbContext.SaveChanges();
         }
@@ -102,6 +121,8 @@ namespace SmartStore.Services
 
             if (item == null)
                 return null;
+
+            //item.ImagePath = Path.GetFileName(item.ImagePath);
 
             var itemViewModel = new ItemViewModel
             {

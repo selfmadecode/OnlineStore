@@ -5,7 +5,7 @@
 
 <h2>AddNewItem</h2>
 
-@using (Html.BeginForm("Save", "Shop"))
+@using (Html.BeginForm("Save", "Shop", FormMethod.Post, new {enctype = "Multipart/Form-Data" }))
 {
     @Html.ValidationSummary(true, "Please fix the following issues");
     //excludepropertyErrors set to true in order to removes the list of errors and pass a default msg
@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(i => i.Item.ExpiringDate)
-        @Html.TextBoxFor(i => i.Item.ExpiringDate, "{0:d MMM yyyy}" , new { @class = "form-control" })
+        @Html.TextBoxFor(i => i.Item.ExpiringDate, "{0:d MMM yyyy}", new { @class = "form-control" })
     </div>
     <div class="form-group">
         @Html.LabelFor(i => i.Item.Quantity)
@@ -42,7 +42,18 @@
         @Html.ValidationMessageFor(i => i.Item.CategoryId)
 
     </div>
+    <div class="form-group">
+        @Html.LabelFor(i => i.Item.ImagePath)
+        <input type="file" name=@Html.NameFor(i =>i.Item.ImageFile) required/>
+        @*<input type="file" id="ImageFile" name="ImageFile" required/>*@
+        @Html.ValidationMessageFor(i => i.Item.ImagePath)
+    </div>
     @Html.HiddenFor(i => i.Item.Id)
+
     <button type="submit" class="btn btn-success">Save</button>
 }
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval");
+}

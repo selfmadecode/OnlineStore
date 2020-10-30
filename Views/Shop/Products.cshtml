@@ -25,20 +25,22 @@
             else
             {   foreach (var item in Model)
                  {
-                    <div class="panel panel-default col-sm-12 col-sm-6 col-md-4 col-lg-4">
+                    <div class="panel panel-default col-xs-6 col-sm-12 col-sm-6 col-md-3 col-lg-3">
                         <div class="panel-heading">
-                            <img src="..." alt="..." class="img-rounded img-responsive">
-                            add the name here with the image
+                            @*@Html.DisplayFor(item.ImagePath)*@
+                            <img src="@Url.Content(item.ImagePath)" alt="..." class="img-rounded img-responsive text-center" style="height: 200px">
+                            @*<img src="~/Content/Images/Screenshot (14).png" class="img-responsive"/>*@
+                            @*add the name here with the    image*@
                         </div>
                         <div class="panel-body">
-                            <p class="text-center"> <strong>@item.Name</strong> </p>
+                            <h3 class="text-center"> <strong>@item.Name</strong> </h3>
                             <i>$@item.Amount</i>
                             <p>@item.Category.Name</p>
                             @Html.ActionLink("Details", "Details", "Shop", new { id = item.Id },
-                                    new { @class = "btn btn-info" })
+                                    new { @class = "btn btn-success" })
 
                             @Html.ActionLink("Add to cart", "AddToCart", "Cart", new { id = item.Id },
-                                    new { @class = "btn btn-success add-btn" })
+                                    new { @class = "btn btn-warning" })
                         </div>
                     </div>
 

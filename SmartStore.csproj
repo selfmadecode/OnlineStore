@@ -274,6 +274,10 @@
     <Compile Include="Migrations\202010281311485_removeCart.Designer.cs">
       <DependentUpon>202010281311485_removeCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202010301012288_AddImageFilePathToItemModel.cs" />
+    <Compile Include="Migrations\202010301012288_AddImageFilePathToItemModel.Designer.cs">
+      <DependentUpon>202010301012288_AddImageFilePathToItemModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -408,6 +412,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\Images\Screenshot %2814%29.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -607,6 +612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010281311485_removeCart.resx">
       <DependentUpon>202010281311485_removeCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010301012288_AddImageFilePathToItemModel.resx">
+      <DependentUpon>202010301012288_AddImageFilePathToItemModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SmartStore.Services;
+using System.IO;
 
 namespace SmartStore.Controllers
 {
@@ -57,19 +58,13 @@ namespace SmartStore.Controllers
         [Authorize(Roles = RoleName.Admin + "," + RoleName.StoreManager)]
         public ActionResult Save(Item item)
         {
-            if(!ModelState.IsValid)
-            {
-                var itemViewModel = _shopService.ItemViewModel(item);
-                
-                return View("ItemForm", itemViewModel);
-            }
+            // frontend handles validation
 
             if (item.Id == 0)
                 _shopService.AddItemToDb(item);
             else
-            {
                 _shopService.UpdateItemInDb(item);
-            }
+            
  
             return RedirectToAction("Products");
         }
