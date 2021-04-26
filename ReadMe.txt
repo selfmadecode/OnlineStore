@@ -1,3 +1,7 @@
+An Online Shopping store built with C# asp.net MVC
+
+
+
 ADMIN DETAILS
 
 UserName: admin@smartstore.com
